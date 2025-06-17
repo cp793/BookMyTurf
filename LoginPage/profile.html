@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Set Your Location</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ✅ Lottie Animation CDN (non-module) -->
+  <script src="https://unpkg.com/lottie-web@latest/build/player/lottie.min.js"></script>
+</head>
+<body>
+
+  <!-- ✅ Main Form -->
+  <div class="container">
+    <h2>Complete Your Profile</h2>
+    <form id="profileForm">
+      <div class="form-group">
+        <label>Enter Your Location:</label>
+        <input type="text" id="location" placeholder="City / Area" required />
+      </div>
+      <button type="submit">Save & Continue</button>
+    </form>
+    <p id="status"></p>
+  </div>
+
+  <!-- ✅ Lottie Loader -->
+  <div id="loading-screen" style="display: none; text-align: center;">
+    <div id="lottie-loader" style="width: 200px; height: 200px; margin: 20px auto;"></div>
+    <p>Saving your location...</p>
+  </div>
+
+  <!-- ✅ Firebase + Lottie Loader Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBBtls8iDd6n2sAtFqL0JRv84r7Af7CmKw",
+      authDomain: "turf-booking-55873.firebaseapp.com",
+      projectId: "turf-booking-55873",
+      storageBucket: "turf-booking-55873.appspot.com",
+      messagingSenderId: "931411332125",
+      appId: "1:931411332125:web:efa27caeb5b5b50de28af4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("profileForm");
+    const loadingScreen = document.getElementById("loading-screen");
+    const mainContainer = document.querySelector(".container");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const location = document.getElementById("location").value;
+      const phone = localStorage.getItem("userPhone");
+      const name = localStorage.getItem("name");
+
+      if (!phone || !name) {
+        document.getElementById("status").innerText = "Session expired. Please login again.";
+        return;
+      }
+
+      // ✅ Show loader
+      mainContainer.style.display = "none";
+      loadingScreen.style.display = "block";
+
+      // ✅ Use global `window.lottie`
+      const anim =window.lottie.loadAnimation({
+        container: document.getElementById('lottie-loader'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'loading.json' // 🟡 Make sure this file is present
+      });
+
+      anim.addEventListener('error', (e) => {
+  console.error("Lottie error:", e);
+});
+
+      try {
+        await setDoc(doc(db, "users", phone), {
+          name,
+          location,
+          phone
+        });
+
+        // ✅ Redirect after short delay
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 2500);
+      } catch (err) {
+        document.getElementById("status").innerText = "Error: " + err.message;
+        loadingScreen.style.display = "none";
+        mainContainer.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>
