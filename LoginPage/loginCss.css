@@ -38,7 +38,7 @@ body {
 }
 .container p {
   font-size: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 10px;
 }
 
 /* Form styling */
@@ -80,4 +80,10 @@ button:hover {
 /* reCAPTCHA spacing */
 #recaptcha-container {
   margin: 1rem 0;
+}
+
+#lottie-loader {
+  width: 400px;
+  height: 400px;
+  margin: 20px auto;
 }

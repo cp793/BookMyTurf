@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Turf Booking - OTP Login</title>
   <link rel="stylesheet" href="loginCss.css" />
-
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://unpkg.com/lottie-web@latest/build/player/lottie.min.js"></script>
 </head>
 <body>
 
@@ -32,6 +31,12 @@
     </div>
 
     <p class="status" id="status"></p>
+  </div>
+
+  <!-- Lottie Loader -->
+  <div id="loading-screen" style="display: none; text-align: center;">
+    <div id="lottie-loader" style="width: 200px; height: 200px; margin: 20px auto;"></div>
+    <p>Redirecting, please wait...</p>
   </div>
 
   <script>
@@ -82,12 +87,32 @@
 
       confirmationResult.confirm(code).then((result) => {
         const user = result.user;
-        document.getElementById("status").innerText = `Welcome, ${name}! Verified: ${user.phoneNumber}`;
-        // You can store user info in Firestore or redirect from here
+        localStorage.setItem("userPhone", user.phoneNumber);
+        localStorage.setItem("name", name);
+        showLoaderAndRedirect();
       }).catch((error) => {
         document.getElementById("status").innerText = "Invalid OTP. Try again.";
       });
     }
+
+    function showLoaderAndRedirect() {
+  document.querySelector(".container").style.display = "none";
+  document.getElementById("loading-screen").style.display = "block";
+
+  // ✅ Load Lottie animation here
+  window.lottie.loadAnimation({
+    container: document.getElementById('lottie-loader'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'loading.json'
+  });
+
+  // ✅ Wait then redirect
+  setTimeout(() => {
+    window.location.href = "profile.html";
+  }, 6000);
+}
   </script>
 </body>
 </html>
