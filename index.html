@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>BookMyTurf</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="script.js"></script>
+    <nav>
+      <ul class="navigationBar">
+        <li>
+          <div id="logo1"><img src="logo1.JPG" /></div>
+        </li>
+        <li class="Search">
+          <input
+            id="search"
+            type="text"
+            name="search"
+            placeholder="search..."
+          />
+        </li>
+        <li class="location">
+          <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+        </li>
+        <li class="ThreeBars">
+          <a onclick="showSidebar()" href="#"
+            ><i class="fa-solid fa-bars"></i
+          ></a>
+        </li>
+      </ul>
+      <!-- side bar -->
+      <ul class="sidebar">
+        <li
+          onclick="hideSidebar()"
+          style="
+          margin-top: 5px;
+            width: 5px;
+            height: 34px;
+            border-radius: 50%;
+          "
+        >
+          <a href="#"><i class="fa-solid fa-circle-xmark"></i></a>
+        </li>
+        <li><a href="LoginPage/login.html">Login / Sign in</a></li>
+        <li><a href="ContactUS/contactus.html">Contact Us</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+
+    <section id="Home">
+      <div id="container1">
+        <!-- panel 1 -->
+        <div class="panel">
+          <div id="panel-1image"></div>
+          <div class="panelContent">
+            <h3>Bhima Sports Arena</h3>
+            <p>
+              <strong>Address:</strong> Rajarshi Shahu Jalataran Talav,
+              Rajarampuri, Kolhapur.
+            </p>
+            <p><strong class="Price">₹900</strong></p>
+          </div>
+        </div>
+        <!-- panel 2 -->
+        <div class="panel">
+          <div id="panel-2image"></div>
+          <div class="panelContent">
+            <h3>Sportingo Turf</h3>
+            <p><strong>Address:</strong> Nagalapark, Kolhapur.</p>
+            <p><strong class="Price">₹800</strong></p>
+          </div>
+        </div>
+        <!-- panel 3 -->
+        <div class="panel">
+          <div id="panel-3image"></div>
+          <div class="panelContent">
+            <h3>Tiki Taka Turf</h3>
+            <p>
+              <strong>Address:</strong> Race Course Naka, Padmala, Kolhapur.
+            </p>
+            <p><strong class="Price">₹800</strong></p>
+          </div>
+        </div>
+        <!-- panel 4 -->
+        <div class="panel">
+          <div id="panel-4image"></div>
+          <div class="panelContent">
+            <h3>Kings Arena</h3>
+            <p><strong>Address:</strong> Near Shivaji University, Kolhapur.</p>
+            <p><strong class="Price">₹1199</strong></p>
+          </div>
+        </div>
+        <!-- panel 5 -->
+        <div class="panel">
+          <div id="panel-5image"></div>
+          <div class="panelContent">
+            <h3>Turf Kolhapur</h3>
+            <p><strong>Address:</strong> Rajarampuri 5th Lane, Kolhapur.</p>
+            <p><strong class="Price">₹950</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
